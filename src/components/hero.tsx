@@ -30,15 +30,6 @@ export function Hero() {
             Connect Wallet
           </Button>
           
-          <Button 
-            variant="outline"
-            className="border-solana-primary/20 hover:bg-solana-primary/10 transition-all duration-300 text-lg px-8 py-6 w-full sm:w-auto"
-            asChild
-          >
-            <Link to="/dashboard">
-              Explore Features
-            </Link>
-          </Button>
         </div>
       </div>
       
