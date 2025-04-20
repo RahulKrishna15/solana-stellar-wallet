@@ -1,14 +1,16 @@
-
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { useWallet } from "@solana/wallet-adapter-react";
+import Dashboard from "./Dashboard";
 
 const Index = () => {
+  const  {publicKey}  = useWallet();
+  console.log(publicKey);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">
-        <Hero />
-      </main>
+      <main className="flex-1">{ publicKey ? <Dashboard /> : <Hero />}</main>
     </div>
   );
 };

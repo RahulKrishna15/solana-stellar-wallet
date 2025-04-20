@@ -9,20 +9,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 const Dashboard = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
       <main className="flex-1 container mx-auto py-8 px-4">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
           <div>
             <h1 className="text-3xl font-bold">Dashboard</h1>
             <p className="text-muted-foreground">Manage your Solana assets</p>
-          </div>
-          <div className="flex space-x-3 mt-4 md:mt-0">
-            <Button className="solana-button-primary gap-2">
-              <Send className="h-4 w-4" /> Send
-            </Button>
-            <Button className="solana-button-secondary gap-2">
-              <QrCode className="h-4 w-4" /> Receive
-            </Button>
           </div>
         </div>
         

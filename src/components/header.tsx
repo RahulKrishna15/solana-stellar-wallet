@@ -1,9 +1,11 @@
-
 import { ThemeToggle } from "./theme-toggle";
-import { Button } from "./ui/button";
 import { Wallet } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import {
+  WalletDisconnectButton,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
 
 interface HeaderProps {
   className?: string;
@@ -11,11 +13,13 @@ interface HeaderProps {
 
 export function Header({ className }: HeaderProps) {
   return (
-    <header className={cn("w-full py-4 px-6 flex items-center justify-between z-10", className)}>
-      <Link 
-        to="/" 
-        className="flex items-center space-x-2 group"
-      >
+    <header
+      className={cn(
+        "w-full py-4 px-6 flex items-center justify-between z-10",
+        className
+      )}
+    >
+      <Link to="/" className="flex items-center space-x-2 group">
         <div className="relative w-8 h-8 rounded-full bg-gradient-to-r from-solana-primary to-solana-accent p-0.5 group-hover:scale-110 transition-all duration-300">
           <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
             <Wallet className="w-4 h-4 text-solana-accent" />
@@ -25,27 +29,9 @@ export function Header({ className }: HeaderProps) {
       </Link>
 
       <div className="flex items-center space-x-4">
-        <Button 
-          variant="ghost"
-          asChild
-          className="text-foreground hover:text-solana-primary transition-colors"
-        >
-          <Link to="/dashboard">Dashboard</Link>
-        </Button>
-        <Button 
-          variant="ghost"
-          asChild
-          className="text-foreground hover:text-solana-primary transition-colors"
-        >
-          <Link to="/nft">NFTs</Link>
-        </Button>
+        <WalletMultiButton />
+        <WalletDisconnectButton />
         <ThemeToggle />
-        <Button 
-          variant="default"
-          className="solana-button-primary"
-        >
-          Connect Wallet
-        </Button>
       </div>
     </header>
   );

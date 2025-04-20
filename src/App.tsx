@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,24 +8,23 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import NFTPage from "./pages/NFT";
 import NotFound from "./pages/NotFound";
+import { WalletProvider } from "./providers/WalletProvider";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="dark">
-      <TooltipProvider>
-        <Router>
-          <Toaster />
-          <Sonner />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/nft" element={<NFTPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Router>
-      </TooltipProvider>
+        <TooltipProvider>
+          <Router>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+        </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
