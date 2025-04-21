@@ -1,5 +1,5 @@
-import { Connection, PublicKey, Transaction, clusterApiUrl } from "@solana/web3.js";
-
+import { useWallet } from "@solana/wallet-adapter-react";
+import { Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction, clusterApiUrl, sendAndConfirmTransaction } from "@solana/web3.js";
 
 export const getBalance = async (publicKey) => {
   const connection = new Connection(clusterApiUrl("devnet"));
@@ -22,3 +22,29 @@ export const getTransactions = async(publicKey: PublicKey) => {
   console.log(transactions) ;
   return transactions;
 }
+
+
+export const makeTransaction = async(reciever : PublicKey, amount : number, sender :  PublicKey, sendTransaction : any ) => {
+  const connection = new Connection(clusterApiUrl("devnet"));
+  const transaction = new Transaction();
+  try
+  {
+    transaction.add(
+      SystemProgram.transfer({
+        fromPubkey : sender,
+        toPubkey : reciever,
+        lamports : amount * LAMPORTS_PER_SOL
+      })
+    )
+    const signature = await sendTransaction(transaction, connection)
+    console.log("Transaction sent successfully", signature);
+    return signature;
+  }
+  catch(error)
+  {
+    console.error("Error sending transaction", error);
+    return null;
+  }
+}
+
+  

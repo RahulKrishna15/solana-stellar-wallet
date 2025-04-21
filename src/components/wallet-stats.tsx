@@ -3,14 +3,15 @@ import { ArrowRight, ArrowDown, ArrowUp, QrCode } from "lucide-react";
 import { Button } from "./ui/button";
 import { useEffect, useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { getBalance, getPrice } from "@/scripts/balance";
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { getBalance, getPrice, makeTransaction } from "@/scripts/balance";
+import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { SendDialog } from "./send-dialog";
 
 export function WalletStats() {
-  const { publicKey } = useWallet();
+  const { publicKey, sendTransaction } = useWallet();
   const [balance, setBalance] = useState(0);
   const [price, setPrice] = useState(0);
+  const [signature, setSignature] = useState(null);
   const [isSendDialogOpen, setIsSendDialogOpen] = useState(false);
 
   useEffect(() => {
@@ -24,8 +25,14 @@ export function WalletStats() {
   }, [publicKey]);
 
   const handleSend = async (recipient: string, amount: number) => {
-    // TODO: Implement the actual send functionality
-    console.log("Sending", amount, "SOL to", recipient);
+    const signature = await makeTransaction(
+      new PublicKey(recipient),
+      amount,
+      publicKey,
+      sendTransaction
+    );
+    setSignature(signature);
+    return signature;
   };
 
   return (
@@ -51,7 +58,9 @@ export function WalletStats() {
             <div className="text-2xl font-bold">
               {balance / LAMPORTS_PER_SOL}
             </div>
-            <p className="text-xs text-muted-foreground">≈ ${price * balance / LAMPORTS_PER_SOL} USD</p>
+            <p className="text-xs text-muted-foreground">
+              ≈ ${(price * balance) / LAMPORTS_PER_SOL} USD
+            </p>
             <div className="mt-4 flex justify-between items-center">
               <Button
                 className="solana-button-primary flex items-center gap-1 text-sm py-1"
@@ -66,7 +75,6 @@ export function WalletStats() {
               >
                 Receive <QrCode className="h-4 w-4" />
               </Button>
-              
             </div>
           </CardContent>
         </Card>
