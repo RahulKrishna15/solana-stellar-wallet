@@ -6,6 +6,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { getBalance, getPrice, makeTransaction } from "@/scripts/balance";
 import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { SendDialog } from "./send-dialog";
+import { ReceiveDialog } from "./receive-dialog";
 
 export function WalletStats() {
   const { publicKey, sendTransaction } = useWallet();
@@ -13,6 +14,7 @@ export function WalletStats() {
   const [price, setPrice] = useState(0);
   const [signature, setSignature] = useState(null);
   const [isSendDialogOpen, setIsSendDialogOpen] = useState(false);
+  const [isReceiveDialogOpen, setIsReceiveDialogOpen] = useState(false);
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -32,6 +34,7 @@ export function WalletStats() {
       sendTransaction
     );
     setSignature(signature);
+    window.location.reload();
     return signature;
   };
 
@@ -72,6 +75,7 @@ export function WalletStats() {
               <Button
                 className="solana-button-secondary flex items-center gap-1 text-sm py-1"
                 size="sm"
+                onClick={() => setIsReceiveDialogOpen(true)}
               >
                 Receive <QrCode className="h-4 w-4" />
               </Button>
@@ -146,6 +150,10 @@ export function WalletStats() {
         isOpen={isSendDialogOpen}
         onClose={() => setIsSendDialogOpen(false)}
         onSend={handleSend}
+      />
+      <ReceiveDialog
+        isOpen={isReceiveDialogOpen}
+        onClose={() => setIsReceiveDialogOpen(false)}
       />
     </>
   );
