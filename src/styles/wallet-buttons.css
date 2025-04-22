@@ -1,0 +1,19 @@
+.wallet-adapter-button {
+  border-radius: 50px !important;
+}
+
+.wallet-adapter-button-disconnect {
+  border-radius: 50px !important;
+}
+
+.wallet-adapter-button-trigger {
+  border-radius: 50px !important;
+}
+
+.wallet-adapter-button:not([disabled]):hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.wallet-adapter-button-disconnect:not([disabled]):hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+} 

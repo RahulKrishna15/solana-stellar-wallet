@@ -41,7 +41,7 @@ export function WalletStats() {
   return (
     <>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card className="solana-card overflow-hidden">
+        <Card className="solana-card overflow-hidden border-solana-primary/10 dark:border-solana-primary/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Balance</CardTitle>
             <svg
@@ -58,7 +58,7 @@ export function WalletStats() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">
+            <div className="text-2xl font-bold text-foreground/90">
               {balance / LAMPORTS_PER_SOL}
             </div>
             <p className="text-xs text-muted-foreground">
@@ -66,14 +66,14 @@ export function WalletStats() {
             </p>
             <div className="mt-4 flex justify-between items-center">
               <Button
-                className="solana-button-primary flex items-center gap-1 text-sm py-1"
+                className="solana-button-primary flex items-center gap-1 text-sm py-1 rounded-full"
                 size="sm"
                 onClick={() => setIsSendDialogOpen(true)}
               >
                 Send <ArrowUp className="h-3 w-3" />
               </Button>
               <Button
-                className="solana-button-secondary flex items-center gap-1 text-sm py-1"
+                className="solana-button-secondary flex items-center gap-1 text-sm py-1 rounded-full"
                 size="sm"
                 onClick={() => setIsReceiveDialogOpen(true)}
               >
@@ -82,7 +82,7 @@ export function WalletStats() {
             </div>
           </CardContent>
         </Card>
-        <Card className="solana-card overflow-hidden">
+        <Card className="solana-card overflow-hidden border-solana-primary/10 dark:border-solana-primary/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
               NFT Collection
@@ -102,19 +102,19 @@ export function WalletStats() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">6 NFTs</div>
+            <div className="text-2xl font-bold text-foreground/90">6 NFTs</div>
             <p className="text-xs text-muted-foreground">2 Collections</p>
             <div className="mt-4">
               <Button
                 variant="outline"
-                className="w-full border-solana-primary/20 hover:bg-solana-primary/10 transition-all duration-300 text-sm"
+                className="w-full border-solana-primary/20 hover:bg-solana-primary/10 transition-all duration-300 text-sm rounded-full"
               >
                 View Collection <ArrowRight className="h-3 w-3 ml-1" />
               </Button>
             </div>
           </CardContent>
         </Card>
-        <Card className="solana-card overflow-hidden">
+        <Card className="solana-card overflow-hidden border-solana-primary/10 dark:border-solana-primary/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
               Recent Activity
@@ -133,12 +133,12 @@ export function WalletStats() {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">8 Txns</div>
+            <div className="text-2xl font-bold text-foreground/90">8 Txns</div>
             <p className="text-xs text-muted-foreground">Last 7 days</p>
             <div className="mt-4">
               <Button
                 variant="outline"
-                className="w-full border-solana-accent/20 hover:bg-solana-accent/10 transition-all duration-300 text-sm"
+                className="w-full border-solana-accent/20 hover:bg-solana-accent/10 transition-all duration-300 text-sm rounded-full"
               >
                 View History <ArrowRight className="h-3 w-3 ml-1" />
               </Button>

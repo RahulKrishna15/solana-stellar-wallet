@@ -6,7 +6,7 @@ import {
   WalletDisconnectButton,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
-
+import "@/styles/wallet-buttons.css";
 interface HeaderProps {
   className?: string;
 }
@@ -28,9 +28,9 @@ export function Header({ className }: HeaderProps) {
         <span className="font-bold text-lg">SolanaWallet</span>
       </Link>
 
-      <div className="flex items-center space-x-4">
-        <WalletMultiButton />
-        <WalletDisconnectButton />
+      <div className="flex items-center space-x-6">
+        <WalletMultiButton className="wallet-adapter-button px-8 py-3" />
+        <WalletDisconnectButton className="wallet-adapter-button-disconnect px-8 py-3" />
         <ThemeToggle />
       </div>
     </header>

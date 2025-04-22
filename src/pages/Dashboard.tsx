@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { useWallet } from "@solana/wallet-adapter-react";
-const Dashboard = ({value}: {value: string}) => {
+const Dashboard = ({ value }: { value: string }) => {
   const { publicKey } = useWallet();
   const { toast } = useToast();
   const handleCopyAddress = () => {
@@ -24,7 +24,7 @@ const Dashboard = ({value}: {value: string}) => {
     });
   };
   return (
-    <div className="min-h-screen flex flex-col ">
+    <div className="min-h-screen flex flex-col">
       <main className="flex-1 container mx-auto py-8 px-4">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
           <div>
@@ -42,27 +42,38 @@ const Dashboard = ({value}: {value: string}) => {
             <TransactionList />
           </div>
           <div>
-            <Card className="solana-card h-full">
+            <Card className="solana-card h-full border-solana-primary/10 dark:border-solana-primary/20">
               <CardHeader>
-                <CardTitle>Your Wallet</CardTitle>
-                <CardDescription>Wallet address and details</CardDescription>
+                <CardTitle className="text-foreground/90">
+                  Your Wallet
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  Wallet address and details
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-col items-center justify-center p-4 bg-solana-dark rounded-lg border border-solana-primary/20 h-96">
-                  <div className="p-2 bg-white rounded-lg mb-3">
-                    <QRCodeCanvas value={value} size={200} className="h-32 w-32 text-solana-dark" />
+                <div className="flex flex-col items-center justify-center p-6 bg-solana-primary/5 dark:bg-solana-dark rounded-lg border border-solana-primary/10 dark:border-solana-primary/20 h-96">
+                  <div className="p-3 bg-white dark:bg-solana-dark rounded-lg mb-4 shadow-sm">
+                    <QRCodeCanvas
+                      value={value}
+                      size={200}
+                      className="h-32 w-32"
+                      bgColor="white"
+                    />
                   </div>
-                  <p className="text-xs font-mono bg-solana-primary/10 p-2 rounded-md">
-                    {value}
-                  </p>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="mt-2 text-xs text-solana-primary"
-                    onClick={handleCopyAddress}
-                  >
-                    Copy Address
-                  </Button>
+                  <div className="w-full max-w-xs">
+                    <p className="text-xs font-mono bg-solana-primary/5 dark:bg-solana-primary/10 p-3 rounded-lg text-foreground/80 break-all text-center">
+                      {value}
+                    </p>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="mt-3 text-xs text-solana-primary hover:text-solana-primary/80 hover:bg-solana-primary/5 dark:hover:bg-solana-primary/10 w-full"
+                      onClick={handleCopyAddress}
+                    >
+                      Copy Address
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
