@@ -16,11 +16,16 @@ interface Props {
 }
 
 export const WalletProvider: FC<Props> = ({ children }) => {
-  // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
-  const network = WalletAdapterNetwork.Devnet;
+  // Get network from environment variable, default to devnet if not set
+  const network =
+    (import.meta.env.VITE_NETWORK as WalletAdapterNetwork) ||
+    WalletAdapterNetwork.Devnet;
 
   // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const endpoint = useMemo(
+    () => import.meta.env.VITE_SOLANA_RPC_URL || clusterApiUrl(network),
+    [network]
+  );
 
   const wallets = useMemo(() => [new UnsafeBurnerWalletAdapter()], [network]);
 

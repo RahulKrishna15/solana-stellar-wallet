@@ -1,5 +1,4 @@
-import { useWallet } from "@solana/wallet-adapter-react";
-import { Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction, clusterApiUrl, sendAndConfirmTransaction } from "@solana/web3.js";
+import { Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction, clusterApiUrl } from "@solana/web3.js";
 
 export const getBalance = async (publicKey) => {
   const connection = new Connection(clusterApiUrl("devnet"));

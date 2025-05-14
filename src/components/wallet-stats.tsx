@@ -7,6 +7,7 @@ import { getBalance, getPrice, makeTransaction } from "@/scripts/balance";
 import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import { SendDialog } from "./send-dialog";
 import { ReceiveDialog } from "./receive-dialog";
+import { useNavigate } from "react-router-dom";
 
 export function WalletStats() {
   const { publicKey, sendTransaction } = useWallet();
@@ -15,6 +16,7 @@ export function WalletStats() {
   const [signature, setSignature] = useState(null);
   const [isSendDialogOpen, setIsSendDialogOpen] = useState(false);
   const [isReceiveDialogOpen, setIsReceiveDialogOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -40,7 +42,7 @@ export function WalletStats() {
 
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-2">
         <Card className="solana-card overflow-hidden border-solana-primary/10 dark:border-solana-primary/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Balance</CardTitle>
@@ -82,10 +84,11 @@ export function WalletStats() {
             </div>
           </CardContent>
         </Card>
+
         <Card className="solana-card overflow-hidden border-solana-primary/10 dark:border-solana-primary/20">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
-              NFT Collection
+              Token Collection
             </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,43 +107,19 @@ export function WalletStats() {
           <CardContent>
             <div className="text-2xl font-bold text-foreground/90">6 NFTs</div>
             <p className="text-xs text-muted-foreground">2 Collections</p>
-            <div className="mt-4">
+            <div className="mt-4 flex justify-between items-center">
               <Button
-                variant="outline"
-                className="w-full border-solana-primary/20 hover:bg-solana-primary/10 transition-all duration-300 text-sm rounded-full"
+                className="solana-button-primary flex items-center gap-1 text-sm py-1 rounded-full"
+                size="sm"
+                onClick={() => navigate("/create-token")}
               >
-                View Collection <ArrowRight className="h-3 w-3 ml-1" />
+                Create Token <ArrowRight className="h-3 w-3" />
               </Button>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="solana-card overflow-hidden border-solana-primary/10 dark:border-solana-primary/20">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Recent Activity
-            </CardTitle>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              className="h-4 w-4 text-solana-accent"
-            >
-              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-            </svg>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-foreground/90">8 Txns</div>
-            <p className="text-xs text-muted-foreground">Last 7 days</p>
-            <div className="mt-4">
               <Button
-                variant="outline"
-                className="w-full border-solana-accent/20 hover:bg-solana-accent/10 transition-all duration-300 text-sm rounded-full"
+                className="solana-button-secondary flex items-center gap-1 text-sm py-1 rounded-full"
+                size="sm"
               >
-                View History <ArrowRight className="h-3 w-3 ml-1" />
+                View Collection <ArrowRight className="h-3 w-3" />
               </Button>
             </div>
           </CardContent>

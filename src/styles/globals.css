@@ -4,11 +4,18 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
 }
 
 /* Custom scrollbar styles */
@@ -23,6 +30,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #14F195;
   border-radius: 4px;
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {

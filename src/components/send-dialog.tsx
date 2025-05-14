@@ -11,6 +11,7 @@ import { Label } from "./ui/label";
 import { useState } from "react";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
+import { toast } from "sonner";
 
 interface SendDialogProps {
   isOpen: boolean;
@@ -23,7 +24,7 @@ export function SendDialog({ isOpen, onClose, onSend }: SendDialogProps) {
   const [amount, setAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { toast } = useToast();
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,37 +33,13 @@ export function SendDialog({ isOpen, onClose, onSend }: SendDialogProps) {
       const signature = await onSend(recipient, parseFloat(amount));
       if (signature) {
         setIsSuccess(true);
-        toast({
-          title: "Transaction Successful",
-          description: `Transaction sent with signature: ${signature.slice(
-            0,
-            8
-          )}...${signature.slice(-8)}`,
-          variant: "default",
-        });
-        // Reset form after 2 seconds
-        setTimeout(() => {
-          setIsSuccess(false);
-          setRecipient("");
-          setAmount("");
-          onClose();
-        }, 2000);
+        toast.success("Transaction Successful");
+
       } else {
-        toast({
-          title: "Transaction Failed",
-          description: "Failed to send transaction. Please try again.",
-          variant: "destructive",
-        });
+        toast.error("Transaction Failed");
       }
     } catch (error) {
-      toast({
-        title: "Transaction Failed",
-        description:
-          error instanceof Error ? error.message : "An error occurred",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      toast.error("Transaction Failed");
     }
   };
 
